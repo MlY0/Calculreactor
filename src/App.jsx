@@ -9,6 +9,7 @@ function App() {
   const [display, setDisplay] = useState(0); // 이걸 상태라고 하거든 (리액트에서) 이 App이라는 컴포넌트가 text라는 상태를 갖고있다 
   const [back, setBack] = useState(0)
   const [isOperatorClicked, setIsOperatorClicked] = useState(false)
+  const [operator, setOperator] = useState('=')
 
   // const [moving, setMoving] = useState(false)
   // setText로 text의 상태를 바꿀수있음  set어쩌구는 리액트 국룰 good
@@ -31,6 +32,7 @@ function App() {
   // 네
 
   const 나는코드들을지배할수있다 = function (event) {
+    if (display == 0) setDisplay('' + event.target.value)
     if (isOperatorClicked) {
       setDisplay('' + event.target.value)
       setIsOperatorClicked(false)
@@ -56,35 +58,43 @@ function App() {
   // if 어떻게쓰는지 까먹음 그건아는데 어떻게 코드작성행하는지를 까먹음
   // 어디서보지 나는코드들을지배할수있다를 쓰는애면 dp1을 초기화하고 창에 숫자 누르는거 보여주기
   // 어디버튼
-  const plusClickHandler = function (e) {
-    setBack(Number(back) + Number(display))
-    setIsOperatorClicked(true)
-  }
-
-  const minusClickHandler = function (e) {
-    setBack(Number(back) - Number(display))
-    setIsOperatorClicked(true)
-  }
-
-  const multiplyClickHandler = function (e) {
-    setBack(Number(back) * Number(display))
-    setIsOperatorClicked(true)
-  }
-
-  const divideClickHandler = function (e) {
-    setBack(Number(back) / Number(display))
+  const operatorClickHandler = function (e) {
+    setBack(Number(display))
+    setOperator(e.target.value)
     setIsOperatorClicked(true)
   }
 
   const equalClickHandler = function (e) {
-    setDisplay(back)
+    switch (operator) {
+      case '+':
+        setDisplay(Number(back) + Number(display))
+        break;
+      case '-':
+        setDisplay(Number(back) - Number(display))
+        break;
+      case '*':
+        setDisplay(Number(back) * Number(display))
+        break;
+      case '/':
+        setDisplay(Number(back) / Number(display))
+        break;
+      case '=':
+        break;
+    }
+    setBack(0)
+    setOperator('=')
     setIsOperatorClicked(true)
   }
 
+  const clearClickHandler = function (e) {
+    setDisplay(0)
+    setBack(0)
+  }
+
   // useEffect 첫번째 파라미터는 어떤 state가 바뀔따마다 실행될 함수, 두번째 파라미터는 그 state의 목록
-  useEffect(function () {
-    setDisplay(back)
-  }, [back])
+  // useEffect(function () {
+  //   setDisplay(back)
+  // }, [back])
 
   // A && B: and 연산 A이면서 B이면 true 
   // A || B: or 연산 A이거나 B이면 true
@@ -136,15 +146,16 @@ function App() {
       <button onClick={나는코드들을지배할수있다} value={8}>8</button>
       <button onClick={나는코드들을지배할수있다} value={9}>9</button>
       <button onClick={나는코드들을지배할수있다} value={0}>0</button>
-      <button onClick={plusClickHandler}>+</button>
+      <button onClick={operatorClickHandler} value={'+'}>+</button>
       {/* 저 밸류에 있는 값들을 그냥 더하면 되는거 아니야?? 어떻게 더하지 useStata1() + useStata2() 맞아*/}
       {/* 이러면 두개 만들어야해서 더 복잡해지나?? */}
       {/* 저렇게 아닐까 내 */}
       {/* 숫자를 내가 누르고싶은만큼 누르고 그 값에 연산자를 추가하고 다시한번 원하는 값을 만들어 */}
-      <button onClick={minusClickHandler}>-</button>
-      <button onClick={divideClickHandler}>/</button>
-      <button onClick={multiplyClickHandler}>*</button>
-      <button onClick={equalClickHandler}>=</button>
+      <button onClick={operatorClickHandler} value='-'>-</button>
+      <button onClick={operatorClickHandler} value='/'>/</button>
+      <button onClick={operatorClickHandler} value='*'>*</button>
+      <button onClick={equalClickHandler} value='='>=</button>
+      <button onClick={clearClickHandler} value='C'>C</button>
       {/* 지금은 눌러도 아무반응이 없다 저거 버ㅈ은 "이걸로 텍스트처리 안해도 대?" 텍스트로 쓰는건 태그의 속성으로 쓸때만 그렇구나 */}
     </>
   )
