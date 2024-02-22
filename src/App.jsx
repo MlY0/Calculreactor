@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css'
 
 // 좋아 깔끔하죠 the void
@@ -8,6 +8,8 @@ function App() {
   // 리액트 까다롭네 근데 const는 상수아냐?? 맞아 상수인데 리액트에선 불변성 이라는 규칙을 지키려고 상수로 표현해 
   const [display, setDisplay] = useState(0); // 이걸 상태라고 하거든 (리액트에서) 이 App이라는 컴포넌트가 text라는 상태를 갖고있다 
   const [back, setBack] = useState(0)
+  const [isOperatorClicked, setIsOperatorClicked] = useState(false)
+
   // const [moving, setMoving] = useState(false)
   // setText로 text의 상태를 바꿀수있음  set어쩌구는 리액트 국룰 good
   // 변수 상수명 바꿀때는 f2를 애용합시다 
@@ -29,19 +31,24 @@ function App() {
   // 네
 
   const 나는코드들을지배할수있다 = function (event) {
-    setDisplay(display + '' + event.target.value)
+    if (isOperatorClicked) {
+      setDisplay('' + event.target.value)
+      setIsOperatorClicked(false)
+    } else {
+      setDisplay(display + '' + event.target.value)
+    }
   }
-// 현재 각 버튼들은 누르면 각자 할일만 하는상태, 1은 1출력하기 / + 누르면 DP1, DP2 더해서 DP1에 출력해줌, DP2에 저장도 동시에함
-// 이 버튼들을 어떻게 엮을지?
-// 아님 다른방법으로 동작하게 할건지?
-// 천천히 생가할래 왜냐면 지금졸려
-// 저거말고 뭘 검색하면 도움이 될까
-// 만들기 저거 해답말고
-// 알고리즘 생각하기
-// 선생님도 계산기 만들어봣삼 ?
-//     다 해보는거 아니야 ??
-//       힌트가 뭐야
-//   상태가뭐야
+  // 현재 각 버튼들은 누르면 각자 할일만 하는상태, 1은 1출력하기 / + 누르면 DP1, DP2 더해서 DP1에 출력해줌, DP2에 저장도 동시에함
+  // 이 버튼들을 어떻게 엮을지?
+  // 아님 다른방법으로 동작하게 할건지?
+  // 천천히 생가할래 왜냐면 지금졸려
+  // 저거말고 뭘 검색하면 도움이 될까
+  // 만들기 저거 해답말고
+  // 알고리즘 생각하기
+  // 선생님도 계산기 만들어봣삼 ?
+  //     다 해보는거 아니야 ??
+  //       힌트가 뭐야
+  //   상태가뭐야
 
   // 그럼 지금 +는 누르면 무슨역할이야?
   // 연산자를 누르고 난 후 첫 숫자버튼을 누를때만 초기화 나는코드들을지배할수있다로 구분하면 안대? 그렇지않아??저건 숫자들만 쓰는애잖아 네연산자는 다른애쓰잖아
@@ -51,12 +58,38 @@ function App() {
   // 어디버튼
   const plusClickHandler = function (e) {
     setBack(Number(back) + Number(display))
+    setIsOperatorClicked(true)
+  }
+
+  const minusClickHandler = function (e) {
+    setBack(Number(back) - Number(display))
+    setIsOperatorClicked(true)
+  }
+
+  const multiplyClickHandler = function (e) {
+    setBack(Number(back) * Number(display))
+    setIsOperatorClicked(true)
+  }
+
+  const divideClickHandler = function (e) {
+    setBack(Number(back) / Number(display))
+    setIsOperatorClicked(true)
+  }
+
+  const equalClickHandler = function (e) {
+    setDisplay(back)
+    setIsOperatorClicked(true)
   }
 
   // useEffect 첫번째 파라미터는 어떤 state가 바뀔따마다 실행될 함수, 두번째 파라미터는 그 state의 목록
   useEffect(function () {
     setDisplay(back)
   }, [back])
+
+  // A && B: and 연산 A이면서 B이면 true 
+  // A || B: or 연산 A이거나 B이면 true
+  // !A: not 연산 A가 아님
+
   // 이상한애네
   // 그럼 0하고 더해지는거 아니야?? 1+0
   // 최초에는 암것도 없으면 0 아니야?
@@ -90,9 +123,9 @@ function App() {
       {/* 왜 재사용이 안될꺼라고 생각해야하는지 모르겠어 */}
       {/* 나는 이제 숫자들을 지배할수있다 */}
       {/* 호기심해결 */}
+      {/* 네
       네
-      네
-      아냐 연산자를 누르고 난 후에 아 그럼 온클릭 하라는거?? 온클릭은 둘다있잖아 연산자랑 숫자랑
+      아냐 연산자를 누르고 난 후에 아 그럼 온클릭 하라는거?? 온클릭은 둘다있잖아 연산자랑 숫자랑 */}
       <button onClick={나는코드들을지배할수있다} value={1}>1</button>
       <button onClick={나는코드들을지배할수있다} value={2}>2</button>
       <button onClick={나는코드들을지배할수있다} value={3}>3</button>
@@ -108,10 +141,10 @@ function App() {
       {/* 이러면 두개 만들어야해서 더 복잡해지나?? */}
       {/* 저렇게 아닐까 내 */}
       {/* 숫자를 내가 누르고싶은만큼 누르고 그 값에 연산자를 추가하고 다시한번 원하는 값을 만들어 */}
-      <button>-</button>
-      <button>/</button>
-      <button>*</button>
-      <button>=</button>
+      <button onClick={minusClickHandler}>-</button>
+      <button onClick={divideClickHandler}>/</button>
+      <button onClick={multiplyClickHandler}>*</button>
+      <button onClick={equalClickHandler}>=</button>
       {/* 지금은 눌러도 아무반응이 없다 저거 버ㅈ은 "이걸로 텍스트처리 안해도 대?" 텍스트로 쓰는건 태그의 속성으로 쓸때만 그렇구나 */}
     </>
   )
