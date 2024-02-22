@@ -124,24 +124,28 @@ function App() {
   // 아니야 123만 떠잇어 창에 1누르면 1231 12311 123111 이렇게대 그런거같은대
   return (
     <>
-      <input readOnly value={display}></input>
-      {/* 맞아 그래서 저기 밑에있는 밸류를 가져온거야 */}
-      {/* 이제 버튼이 필요하겠죠 일단 모양 신경쓰지말고 전부 좌르륵 늘어놔봅시다  */}
-      {/* clickOneHandler이거는 그냥 맘대로 넣은거에요? 이런건 어떻게 구분ㅇ해요? onclick네 이런걸 이름취급인지 코드취급인지 어떻게알아요? */}
-      {/* 그런 조왓어 */}
-      {/* 이제 누르면 1도 추가되고 2도 추가대 */}
-      {/* 왜 재사용이 안될꺼라고 생각해야하는지 모르겠어 */}
-      {/* 나는 이제 숫자들을 지배할수있다 */}
-      {/* 호기심해결 */}
-      {/* 네
+      <div className='container'>
+        <div className='con'>
+          <input className='input' value={display}></input>
+          {/* 맞아 그래서 저기 밑에있는 밸류를 가져온거야 */}
+          {/* 이제 버튼이 필요하겠죠 일단 모양 신경쓰지말고 전부 좌르륵 늘어놔봅시다  */}
+          {/* clickOneHandler이거는 그냥 맘대로 넣은거에요? 이런건 어떻게 구분ㅇ해요? onclick네 이런걸 이름취급인지 코드취급인지 어떻게알아요? */}
+          {/* 그런 조왓어 */}
+          {/* 이제 누르면 1도 추가되고 2도 추가대 */}
+          {/* 왜 재사용이 안될꺼라고 생각해야하는지 모르겠어 */}
+          {/* 나는 이제 숫자들을 지배할수있다 */}
+          {/* 호기심해결 */}
+          {/* 네
       네
       아냐 연산자를 누르고 난 후에 아 그럼 온클릭 하라는거?? 온클릭은 둘다있잖아 연산자랑 숫자랑 */}
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((b, i) => <button key={i} onClick={나는코드들을지배할수있다} value={b}>{b}</button>)}
-      
-      {['+','-','/','*'].map((x, y) => <button key={y} onClick={operatorClickHandler} value={x}>{x}</button>)}
-      <button onClick={equalClickHandler} value={'='}>=</button>
-      <button onClick={clearClickHandler} value={'C'}>C</button>
-      {/* 지금은 눌러도 아무반응이 없다 저거 버ㅈ은 "이걸로 텍스트처리 안해도 대?" 텍스트로 쓰는건 태그의 속성으로 쓸때만 그렇구나 */}
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((b, i) => <button key={i} className={'button-' + b} onClick={나는코드들을지배할수있다} value={b}>{b}</button>)}
+
+          {['+', '-', '/', '*'].map((x, y) => <button key={y} className={'button-op-' + y} onClick={operatorClickHandler} value={x}>{x}</button>)}
+          <button className={'button-equal'} onClick={equalClickHandler} value={'='}>=</button>
+          <button className={'button-clear'} onClick={clearClickHandler} value={'C'}>C</button>
+          {/* 지금은 눌러도 아무반응이 없다 저거 버ㅈ은 "이걸로 텍스트처리 안해도 대?" 텍스트로 쓰는건 태그의 속성으로 쓸때만 그렇구나 */}
+        </div>
+      </div>
     </>
   )
 }

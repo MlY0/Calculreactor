@@ -18,6 +18,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -28,6 +29,119 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: linear-gradient(to bottom, #434343, #000000);
+}
+
+input {
+  height: 80px;
+  font-size: 30px;
+  color: white;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  border-color: #1a1a1a;
+  border-width: 2px;
+  padding: 0 10px;
+}
+
+
+.con {
+  display: grid;
+  grid-gap: 10px;
+  border: 2px solid grey;
+  /* 테두리 추가 */
+  border-radius: 10px;
+  /* 테두리 모서리 둥글게 */
+  padding: 20px;
+  background-image: linear-gradient(to bottom, #00c6ff, #0072ff);
+  /* 테두리와 버튼 사이 간격 */
+  justify-content: center;
+
+  grid-template:
+    "inp  inp  inp  inp"
+    "btn7 btn8 btn9 clr"
+    "btn4 btn5 btn6 min"
+    "btn1 btn2 btn3 plu"
+    "btn0 equ  mul  div";
+  justify-content: center;
+  /* 버튼을 가운데 정렬합니다. */
+
+}
+
+
+
+.input {
+  grid-area: inp;
+}
+
+.button-1 {
+  grid-area: btn1;
+}
+
+.button-2 {
+  grid-area: btn2;
+
+}
+
+.button-3 {
+  grid-area: btn3;
+
+}
+
+.button-4 {
+  grid-area: btn4;
+
+}
+
+.button-5 {
+  grid-area: btn5;
+
+}
+
+.button-6 {
+  grid-area: btn6;
+
+}
+
+.button-7 {
+  grid-area: btn7;
+
+}
+
+.button-8 {
+  grid-area: btn8;
+
+}
+
+.button-9 {
+  grid-area: btn9;
+}
+
+.button-0 {
+  grid-area: btn0;
+}
+
+.button-op-0 {
+  grid-area: plu;
+}
+
+.button-op-1 {
+  grid-area: min;
+}
+
+.button-op-2 {
+  grid-area: div;
+}
+
+.button-op-3 {
+  grid-area: mul;
+}
+
+.button-equal {
+  grid-area: equ;
+}
+
+.button-clear {
+  grid-area: clr;
 }
 
 h1 {
@@ -37,7 +151,7 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid grey;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -46,9 +160,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -59,9 +175,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
