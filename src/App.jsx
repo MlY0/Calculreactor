@@ -136,26 +136,11 @@ function App() {
       {/* 네
       네
       아냐 연산자를 누르고 난 후에 아 그럼 온클릭 하라는거?? 온클릭은 둘다있잖아 연산자랑 숫자랑 */}
-      <button onClick={나는코드들을지배할수있다} value={1}>1</button>
-      <button onClick={나는코드들을지배할수있다} value={2}>2</button>
-      <button onClick={나는코드들을지배할수있다} value={3}>3</button>
-      <button onClick={나는코드들을지배할수있다} value={4}>4</button>
-      <button onClick={나는코드들을지배할수있다} value={5}>5</button>
-      <button onClick={나는코드들을지배할수있다} value={6}>6</button>
-      <button onClick={나는코드들을지배할수있다} value={7}>7</button>
-      <button onClick={나는코드들을지배할수있다} value={8}>8</button>
-      <button onClick={나는코드들을지배할수있다} value={9}>9</button>
-      <button onClick={나는코드들을지배할수있다} value={0}>0</button>
-      <button onClick={operatorClickHandler} value={'+'}>+</button>
-      {/* 저 밸류에 있는 값들을 그냥 더하면 되는거 아니야?? 어떻게 더하지 useStata1() + useStata2() 맞아*/}
-      {/* 이러면 두개 만들어야해서 더 복잡해지나?? */}
-      {/* 저렇게 아닐까 내 */}
-      {/* 숫자를 내가 누르고싶은만큼 누르고 그 값에 연산자를 추가하고 다시한번 원하는 값을 만들어 */}
-      <button onClick={operatorClickHandler} value='-'>-</button>
-      <button onClick={operatorClickHandler} value='/'>/</button>
-      <button onClick={operatorClickHandler} value='*'>*</button>
-      <button onClick={equalClickHandler} value='='>=</button>
-      <button onClick={clearClickHandler} value='C'>C</button>
+      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((b, i) => <button key={i} onClick={나는코드들을지배할수있다} value={b}>{b}</button>)}
+      
+      {['+','-','/','*'].map((x, y) => <button key={y} onClick={operatorClickHandler} value={x}>{x}</button>)}
+      <button onClick={equalClickHandler} value={'='}>=</button>
+      <button onClick={clearClickHandler} value={'C'}>C</button>
       {/* 지금은 눌러도 아무반응이 없다 저거 버ㅈ은 "이걸로 텍스트처리 안해도 대?" 텍스트로 쓰는건 태그의 속성으로 쓸때만 그렇구나 */}
     </>
   )
